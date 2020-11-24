@@ -1,8 +1,8 @@
 package de.nycode.gameoflife
 
-import de.nycode.gameoflife.de.nycode.gameoflife.cell.BorderCell
-import de.nycode.gameoflife.de.nycode.gameoflife.cell.Cell
-import de.nycode.gameoflife.de.nycode.gameoflife.cell.CellState
+import de.nycode.gameoflife.cell.BorderCell
+import de.nycode.gameoflife.cell.Cell
+import de.nycode.gameoflife.cell.CellState
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.CanvasRenderingContext2D
@@ -13,12 +13,13 @@ const val gameFieldHeight = 500
 
 const val scale = 2.0
 
-private val cells: Array<Array<Cell>> = initializeArray()
+private lateinit var cells: Array<Array<Cell>>
 
 private var fps = 0
 private var lastFrame: Double? = null
 
 fun main() {
+    cells = initializeArray()
     val canvas = createCanvas()
 
     val ctx = canvas.getContext("2d") as CanvasRenderingContext2D
@@ -45,9 +46,21 @@ fun update() {
 
     cells.forEach {
         it.forEach { cell ->
-
             val neighbours = getNeighbors(cell)
+            val aliveNeighbours = neighbours.filter { neighbour -> neighbour.isAlive() }.size
+            val deadNeighbours = neighbours.filter { neighbour -> neighbour.isDead() }.size
+            // TODO: change state after this "generation" and not instantly
 
+            if (cell.isDead()) {
+                when (aliveNeighbours) {
+                    3 -> {
+                        cell.state = CellState.ALIVE
+                    }
+                    0, 1 -> {
+                        cell.state = CellState.DEAD
+                    }
+                }
+            }
         }
     }
 }
@@ -69,7 +82,7 @@ fun Cell.getOffsetCell(offsetX: Int, offsetY: Int): Cell {
     val neighborX = this.x + offsetX
     val neighborY = this.y + offsetY
     // Check if it's out of range
-    return if (neighborX < 0 || neighborY < 0 || neighborX > gameFieldWidth || neighborY > gameFieldHeight) {
+    return if (neighborX < 0 || neighborY < 0 || neighborX >= cells.size || neighborY >= cells[neighborX.toInt()].size) {
         BorderCell
     } else {
         cells[neighborX.toInt()][neighborY.toInt()]

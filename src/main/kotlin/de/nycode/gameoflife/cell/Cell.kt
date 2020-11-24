@@ -1,4 +1,4 @@
-package de.nycode.gameoflife.de.nycode.gameoflife.cell
+package de.nycode.gameoflife.cell
 
 open class Cell(val x: Double, val y: Double, var state: CellState) {
 

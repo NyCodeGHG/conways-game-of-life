@@ -1,8 +1,8 @@
-package de.nycode.gameoflife.de.nycode.gameoflife.cell
+package de.nycode.gameoflife.cell
 
 enum class CellState(val style: String) {
 
-    ALIVE("green"),
-    DEAD("red")
+    ALIVE("white"),
+    DEAD("black")
 
 }
