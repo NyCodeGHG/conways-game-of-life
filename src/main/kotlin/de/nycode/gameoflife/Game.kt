@@ -1,5 +1,8 @@
 package de.nycode.gameoflife
 
+import de.nycode.gameoflife.de.nycode.gameoflife.cell.BorderCell
+import de.nycode.gameoflife.de.nycode.gameoflife.cell.Cell
+import de.nycode.gameoflife.de.nycode.gameoflife.cell.CellState
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.CanvasRenderingContext2D
