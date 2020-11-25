@@ -9,3 +9,15 @@ fun main() {
         gameLoop.start()
     }, 1000)
 }
+
+/**
+ * Options for modifying the game
+ */
+object Options {
+    val aliveChancePercentage = 10.0
+
+    /**
+     * Or "pac-man" mode
+     */
+    val torusMode = true
+}

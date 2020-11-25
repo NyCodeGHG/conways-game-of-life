@@ -18,7 +18,7 @@ class GameLoop(private val width: Int, private val height: Int, private val scal
         val canvas = document.createElement("canvas") as HTMLCanvasElement
         canvas.width = (width * scale).toInt()
         canvas.height = (height * scale).toInt()
-        document.body?.appendChild(canvas)
+        document.body?.querySelector(".container")?.appendChild(canvas)
         return canvas
     }
 

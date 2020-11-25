@@ -1,5 +1,6 @@
 package de.nycode.gameoflife.cell
 
+import de.nycode.gameoflife.Options
 import de.nycode.gameoflife.game.GameOfLife
 
 /**
@@ -33,16 +34,38 @@ open class Cell(private val game: GameOfLife?, val x: Double, val y: Double, var
     private fun getOffsetCell(offsetX: Int, offsetY: Int): Cell {
         if (this.game == null) return BorderCell
 
-        val neighborX = this.x + offsetX
-        val neighborY = this.y + offsetY
+        var neighborX = this.x + offsetX
+        var neighborY = this.y + offsetY
         // Check if it's out of range
         return if (neighborX < 0 ||
             neighborY < 0 ||
             neighborX >= this.game.cells.size ||
             neighborY >= this.game.cells[neighborX.toInt()].size
         ) {
-            // It's a border cell so we return BorderCell
-            BorderCell
+            if (Options.torusMode) {
+                // [1] [1] [1] [1] [1]
+                //  0   1   2   3   4  5
+                // neighborX %= this.game.cells.size
+
+                if (neighborX < 0) {
+                    neighborX += this.game.cells.size
+                } else if (neighborX > this.game.cells.size - 1) {
+                    neighborX -= this.game.cells.size
+                }
+
+                // neighborY %= this.game.cells[neighborX.toInt()].size
+
+                if (neighborY < 0) {
+                    neighborY += this.game.cells[neighborX.toInt()].size
+                } else if (neighborY > this.game.cells[neighborX.toInt()].size - 1) {
+                    neighborY -= this.game.cells[neighborX.toInt()].size
+                }
+
+                this.game.cells[neighborX.toInt()][neighborY.toInt()]
+            } else {
+                // It's a border cell so we return BorderCell
+                BorderCell
+            }
         } else {
             // Return neighbour cell
             this.game.cells[neighborX.toInt()][neighborY.toInt()]

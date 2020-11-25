@@ -8,4 +8,11 @@ Das Problem, was mir direkt in den Kopf kam, wo es ein bisschen tricky werden k�
 
 Für die Spielfläche selber wollte ich ein zweidimensionales Array nutzen. Jede Zelle ist dann eine Instanz der Klasse [Cell](../src/main/kotlin/de/nycode/gameoflife/cell/Cell.kt). Eine Ausnahme hierbei sind die äußeren Ränder, diese sind die Instanz des Objects [BorderCell](../src/main/kotlin/de/nycode/gameoflife/cell/BorderCell.kt).
 
+
+## Spielfeld
+
 ![Hochprofessionelle Skizze](./sketch_field.png)
+
+Ich war mir nicht ganz sicher, ob ich jetzt den Rand mit einfachen toten Zellen belegen soll, oder es wie in Pac-Man machen soll. Deswegen hab ich einfach beides gemacht.
+
+Umstellbar ist es [hier](../src/main/kotlin/de/nycode/gameoflife/Main.kt#L16)
