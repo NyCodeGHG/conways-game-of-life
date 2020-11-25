@@ -20,4 +20,4 @@ jobs:
           arguments: clean browserProductionWebpack gitPublishPush
         env:
           GRGIT_USER: NyCodeGHG
-          GIRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+          GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
