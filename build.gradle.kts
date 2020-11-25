@@ -36,14 +36,10 @@ kotlin {
 }
 
 gitPublish {
-    repoUri.set("git@github.com:NyCodeGHG/conways-game-of-life.git")
+    repoUri.set("https://github.com/NyCodeGHG/conways-game-of-life.git")
     branch.set("gh-pages")
     contents {
         from("build/distributions")
         exclude("*.map")
     }
-}
-
-task("publish") {
-    dependsOn(tasks.clean, tasks.build, tasks.gitPublishPush)
 }
