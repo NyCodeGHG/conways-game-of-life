@@ -1,5 +1,6 @@
 plugins {
     kotlin("js") version "1.4.20"
+    id("org.ajoberstar.git-publish") version "3.0.0"
 }
 
 group = "de.nycode"
@@ -32,4 +33,17 @@ kotlin {
             }
         }
     }
+}
+
+gitPublish {
+    repoUri.set("git@github.com:NyCodeGHG/conways-game-of-life.git")
+    branch.set("gh-pages")
+    contents {
+        from("build/distributions")
+        exclude("*.map")
+    }
+}
+
+task("publish") {
+    dependsOn(tasks.clean, tasks.build, tasks.gitPublishPush)
 }
