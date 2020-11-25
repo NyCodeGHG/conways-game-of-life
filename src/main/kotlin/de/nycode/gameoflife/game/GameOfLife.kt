@@ -30,7 +30,10 @@ class GameOfLife(internal val width: Int, internal val height: Int, val scale: D
                         3 -> {
                             cell.state = CellState.ALIVE
                         }
-                        0, 1 -> {
+                    }
+                } else {
+                    when (aliveNeighbours) {
+                        0, 1, 4, 5, 6, 7, 8 -> {
                             cell.state = CellState.DEAD
                         }
                     }

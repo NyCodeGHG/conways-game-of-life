@@ -6,7 +6,7 @@ private var fps = 0
 private var lastFrame: Double? = null
 
 fun main() {
-    val gameLoop = GameLoop(100, 100, 1.0)
+    val gameLoop = GameLoop(100, 100, 8.0)
     gameLoop.start()
 }
 
