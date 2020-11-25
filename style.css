@@ -1,0 +1,28 @@
+canvas {
+    margin: 0 auto;
+    display: block;
+}
+
+.stats {
+    padding: 20px;
+    font-size: 1rem;
+}
+
+span {
+    margin: 20px;
+}
+
+a {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+}
+
+a img {
+    transition: all 300ms ease;
+}
+
+a img:hover {
+    transform: scale(1.25);
+    filter: drop-shadow(1px 1px 30px rgba(0, 0, 0, 0.7));
+}
