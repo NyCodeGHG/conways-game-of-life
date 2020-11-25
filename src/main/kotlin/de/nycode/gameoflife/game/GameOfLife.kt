@@ -6,13 +6,21 @@ import kotlinx.browser.document
 import org.w3c.dom.HTMLParagraphElement
 import kotlin.random.Random
 
+/**
+ * Actual [Game] implementation for Conway’s Game of Life
+ */
 class GameOfLife(internal val width: Int, internal val height: Int, val scale: Double) : Game() {
 
     private var generation = 0
     private val aliveChancePercentage = 31.25
+
     override val renderer: Renderer = GameOfLifeRenderer(this)
+
     internal val cells: Array<Array<Cell>> = this.initializeGameField()
+
     private val generationText = document.querySelector("#generation") as HTMLParagraphElement
+    private val aliveCellsText = document.querySelector("#aliveCells") as HTMLParagraphElement
+    private val deadCellsText = document.querySelector("#deadCells") as HTMLParagraphElement
 
     private fun initializeGameField(): Array<Array<Cell>> {
         return Array(width) { x ->
@@ -27,10 +35,7 @@ class GameOfLife(internal val width: Int, internal val height: Int, val scale: D
         cells.forEach {
             it.forEach { cell ->
                 val neighbours = cell.getNeighbors()
-
                 val aliveNeighbours = neighbours.filter { neighbour -> neighbour.isAlive() }.size
-                val deadNeighbours = neighbours.filter { neighbour -> neighbour.isDead() }.size
-                // TODO: change state after this "generation" and not instantly
 
                 if (cell.isDead()) {
                     when (aliveNeighbours) {
@@ -55,11 +60,12 @@ class GameOfLife(internal val width: Int, internal val height: Int, val scale: D
         }
         if (changes.isNotEmpty()) {
             generationText.innerText = "${++generation} Generations"
+            aliveCellsText.innerText = "${cells.flatten().filter { it.isAlive() }.size} Alive Cells"
+            deadCellsText.innerText = "${cells.flatten().filter { it.isDead() }.size} Dead Cells"
         }
     }
 
     private fun getRandomCellState(): CellState {
-        //val aliveChancePercentage = this.aliveChancePercentage
         val randomDouble = Random.nextDouble(100.0)
         return if (randomDouble < aliveChancePercentage) {
             CellState.ALIVE
