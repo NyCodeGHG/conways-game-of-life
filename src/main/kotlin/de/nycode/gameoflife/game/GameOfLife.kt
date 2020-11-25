@@ -2,13 +2,17 @@ package de.nycode.gameoflife.game
 
 import de.nycode.gameoflife.cell.Cell
 import de.nycode.gameoflife.cell.CellState
+import kotlinx.browser.document
+import org.w3c.dom.HTMLParagraphElement
 import kotlin.random.Random
 
 class GameOfLife(internal val width: Int, internal val height: Int, val scale: Double) : Game() {
 
+    private var generation = 0
     private val aliveChancePercentage = 31.25
     override val renderer: Renderer = GameOfLifeRenderer(this)
     internal val cells: Array<Array<Cell>> = this.initializeGameField()
+    private val generationText = document.querySelector("#generation") as HTMLParagraphElement
 
     private fun initializeGameField(): Array<Array<Cell>> {
         return Array(width) { x ->
@@ -48,6 +52,9 @@ class GameOfLife(internal val width: Int, internal val height: Int, val scale: D
             val y = it.key.second
 
             cells[x][y].state = it.value
+        }
+        if (changes.isNotEmpty()) {
+            generationText.innerText = "${++generation} Generations"
         }
     }
 
