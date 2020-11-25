@@ -11,12 +11,11 @@ class GameOfLife(internal val width: Int, internal val height: Int, val scale: D
     internal val cells: Array<Array<Cell>> = this.initializeGameField()
 
     private fun initializeGameField(): Array<Array<Cell>> {
-        val array = Array(width) { x ->
+        return Array(width) { x ->
             Array(height) { y ->
-                Cell(this, x.toDouble(), y.toDouble(), this.getRandomCellState())
+                Cell(this, x.toDouble(), y.toDouble(), getRandomCellState())
             }
         }
-        return array
     }
 
     override fun update() {
