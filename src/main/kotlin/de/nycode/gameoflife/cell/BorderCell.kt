@@ -1,3 +1,6 @@
 package de.nycode.gameoflife.cell
 
-object BorderCell : Cell(-1.0, -1.0, CellState.DEAD)
+/**
+ * Represents a [Cell] but outside of the game field
+ */
+object BorderCell : Cell(null, -1.0, -1.0, CellState.DEAD)
