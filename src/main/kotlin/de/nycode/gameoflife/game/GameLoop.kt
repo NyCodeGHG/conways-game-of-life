@@ -9,6 +9,7 @@ class GameLoop(private val width: Int, private val height: Int, private val scal
 
     private val game: Game = GameOfLife(width, height, scale)
     private val canvas = this.createCanvas()
+    private val speed = 100
 
     /**
      * Creates a canvas, sets its size and appends it to the document's body
@@ -30,11 +31,13 @@ class GameLoop(private val width: Int, private val height: Int, private val scal
     }
 
     private fun runGameFrame(ctx: CanvasRenderingContext2D) {
-        window.requestAnimationFrame {
-            this.game.update()
-            this.game.renderer.render(ctx)
+        //window.requestAnimationFrame {
+        this.game.update()
+        this.game.renderer.render(ctx)
+        window.setTimeout({
             runGameFrame(ctx)
-        }
+        }, speed)
+        //}
     }
 
 }

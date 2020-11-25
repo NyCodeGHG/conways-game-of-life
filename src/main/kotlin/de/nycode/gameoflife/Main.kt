@@ -1,13 +1,16 @@
 package de.nycode.gameoflife
 
 import de.nycode.gameoflife.game.GameLoop
+import kotlinx.browser.window
 
 private var fps = 0
 private var lastFrame: Double? = null
 
 fun main() {
     val gameLoop = GameLoop(100, 100, 8.0)
-    gameLoop.start()
+    window.setTimeout({
+        gameLoop.start()
+    }, 1000)
 }
 
 private val times = arrayListOf<Double>()
