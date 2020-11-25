@@ -16,7 +16,6 @@ class GameOfLife(internal val width: Int, internal val height: Int, val scale: D
                 Cell(this, x.toDouble(), y.toDouble(), this.getRandomCellState())
             }
         }
-        console.log("Field initialized")
         return array
     }
 
@@ -56,8 +55,6 @@ class GameOfLife(internal val width: Int, internal val height: Int, val scale: D
     private fun getRandomCellState(): CellState {
         //val aliveChancePercentage = this.aliveChancePercentage
         val randomDouble = Random.nextDouble(100.0)
-        println(randomDouble)
-        println(randomDouble < aliveChancePercentage)
         return if (randomDouble < aliveChancePercentage) {
             CellState.ALIVE
         } else {
