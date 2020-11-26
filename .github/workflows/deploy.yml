@@ -17,7 +17,7 @@ jobs:
         name: Gradle Publish
         with:
           job-id: jdk11
-          arguments: clean browserProductionWebpack gitPublishPush
+          arguments: clean browserProductionWebpack dokkaHtml gitPublishPush
         env:
           GRGIT_USER: NyCodeGHG
           GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}

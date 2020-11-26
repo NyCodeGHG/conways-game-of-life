@@ -1,5 +1,6 @@
 plugins {
     kotlin("js") version "1.4.20"
+    id("org.jetbrains.dokka") version "1.4.10.2"
     id("org.ajoberstar.git-publish") version "3.0.0"
 }
 
@@ -9,10 +10,6 @@ version = "1.0-SNAPSHOT"
 repositories {
     jcenter()
     mavenCentral()
-}
-
-dependencies {
-    testImplementation(kotlin("test-js"))
 }
 
 kotlin {
@@ -41,5 +38,10 @@ gitPublish {
     contents {
         from("build/distributions")
         exclude("*.map")
+        from("build/dokka")
     }
+}
+
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
 }
