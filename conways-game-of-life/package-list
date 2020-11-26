@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+de.nycode.gameoflife
+de.nycode.gameoflife.cell
+de.nycode.gameoflife.game
+
