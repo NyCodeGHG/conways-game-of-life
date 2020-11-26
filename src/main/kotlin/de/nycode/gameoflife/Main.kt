@@ -14,10 +14,19 @@ fun main() {
  * Options for modifying the game
  */
 object Options {
-    val aliveChancePercentage = 10.0
 
     /**
-     * Or "pac-man" mode
+     * The speed how long the [GameLoop] waits before rendering the next frame in milliseconds
      */
-    val torusMode = true
+    const val updateSpeed = 100
+
+    /**
+     * The chance of a cell to be alive in percent
+     */
+    const val aliveChancePercentage = 10.0
+
+    /**
+     * If the neighbours behave like in a torus ("like in pac man") or the walls are just [de.nycode.gameoflife.cell.BorderCell]s
+     */
+    const val torusMode = true
 }

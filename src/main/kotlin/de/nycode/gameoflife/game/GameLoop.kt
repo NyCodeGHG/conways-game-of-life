@@ -1,5 +1,6 @@
 package de.nycode.gameoflife.game
 
+import de.nycode.gameoflife.Options
 import kotlinx.browser.document
 import kotlinx.browser.window
 import org.w3c.dom.CanvasRenderingContext2D
@@ -9,7 +10,6 @@ class GameLoop(private val width: Int, private val height: Int, private val scal
 
     private val game: Game = GameOfLife(width, height, scale)
     private val canvas = this.createCanvas()
-    private val speed = 100
 
     /**
      * Creates a canvas, sets its size and appends it to the document's body
@@ -36,7 +36,7 @@ class GameLoop(private val width: Int, private val height: Int, private val scal
         this.game.renderer.render(ctx)
         window.setTimeout({
             runGameFrame(ctx)
-        }, speed)
+        }, Options.updateSpeed)
         //}
     }
 
